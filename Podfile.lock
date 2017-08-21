@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (4.5.0)
+  - RGMapper (1.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.3)
+  - RGMapper (from `https://github.com/riteshhgupta/RGMapper.git`)
+
+EXTERNAL SOURCES:
+  RGMapper:
+    :git: https://github.com/riteshhgupta/RGMapper.git
+
+CHECKOUT OPTIONS:
+  RGMapper:
+    :commit: 65eaa43ab62032f2ec122154fc5f7b3ff5c8bf46
+    :git: https://github.com/riteshhgupta/RGMapper.git
+
+SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  RGMapper: 538088d0089e1c663042ad886cc4efce713c333c
+
+PODFILE CHECKSUM: 782538d5a257bd8572e7f03d5a512bffd8afb09c
+
+COCOAPODS: 1.1.1
