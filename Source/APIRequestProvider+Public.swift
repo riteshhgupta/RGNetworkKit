@@ -12,6 +12,14 @@ import RGMapper
 
 public extension APIRequestProvider {
 
+	func cancel() {
+		dataRequest?.cancel()
+	}
+
+	var sessionManager: SessionManager {
+		return SessionManager.default
+	}
+
 	func parse(response: Data) throws -> Any {
 		return try JSONSerialization.jsonObject(with: response, options: .allowFragments)
 	}
@@ -21,14 +29,14 @@ public extension APIRequestProvider {
 	}
 
 	func request(router: APIRouterProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
-		sessionManager
+		dataRequest = sessionManager
 			.request(router)
 			.debugLog()
 			.responseData(completionHandler: handler)
 	}
 
 	func request(router: APIRouterProvider, completion handler: @escaping (Result<Any>, DataResponse<Data>) -> Void) {
-		sessionManager
+		dataRequest = sessionManager
 			.request(router)
 			.validate(statusCode: (200..<300))
 			.debugLog()

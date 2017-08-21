@@ -47,9 +47,9 @@ public extension APIRouterProvider {
 	}
 
 	var urlWithPath: URL {
-		var url = baseUrl
+		var url = baseURL
 		if !path.isEmpty {
-			url = baseUrl.appendingPathComponent(path)
+			url = baseURL.appendingPathComponent(path)
 		}
 		return url
 	}

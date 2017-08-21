@@ -8,7 +8,12 @@
 
 import Foundation
 
+/// JSON is not a concrete type, rather just a typealias
+
 public typealias JSON = [String: Any]
+
+/// `APIRouterProvider` requires an object which conform to `APIParameterProtocol`
+/// it provides the parameters to `APIRouterProvider`
 
 public protocol APIParameterProtocol {
 

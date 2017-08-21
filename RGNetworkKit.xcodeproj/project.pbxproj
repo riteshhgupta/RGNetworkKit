@@ -93,12 +93,12 @@
 			isa = PBXGroup;
 			children = (
 				3DA9AFC01E3D12310019ED7B /* AppDelegate.swift */,
+				3D291F4D1F4AB55E00AA136F /* Example.swift */,
 				3DA9AFC21E3D12310019ED7B /* ViewController.swift */,
 				3DA9AFC41E3D12310019ED7B /* Main.storyboard */,
 				3DA9AFC71E3D12310019ED7B /* Assets.xcassets */,
 				3DA9AFC91E3D12310019ED7B /* LaunchScreen.storyboard */,
 				3DA9AFCC1E3D12310019ED7B /* Info.plist */,
-				3D291F4D1F4AB55E00AA136F /* Example.swift */,
 			);
 			path = RGNetworkKit;
 			sourceTree = "<group>";
