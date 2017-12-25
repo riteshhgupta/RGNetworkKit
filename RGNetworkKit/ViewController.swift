@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		apiClient.request(
+		apiClient.dataRequest(
 			router: APIRouter(),
 			completion: handler
 		)

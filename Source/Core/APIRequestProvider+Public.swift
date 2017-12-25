@@ -28,7 +28,7 @@ public extension APIRequestProvider {
 
 public extension APIRequestProvider {
 	
-	public func request(router: APIRouterProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
+	public func dataRequest(router: APIRouterProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
 		dataRequest = sessionManager
 			.request(router)
 			.validate(statusCode: (200..<300))
@@ -40,8 +40,8 @@ public extension APIRequestProvider {
 		}
 	}
 	
-	public func request<T: Mappable, E>(router: APIRouterProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void) {
-		request(router: router) { [weak self] response in
+	public func mappableRequest<T: Mappable, E>(router: APIRouterProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void) {
+		dataRequest(router: router) { [weak self] response in
 			guard let this = self, let data = response.data else {
 				if let error = response.error { handler(Result.failure(error.apiError())) }
 				return
