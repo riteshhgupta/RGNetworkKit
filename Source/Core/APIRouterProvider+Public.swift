@@ -34,11 +34,11 @@ public extension APIRouterProvider {
 		]
 	}
 
-	var parameterProvider: APIParameterProtocol? {
+	var parameterProvider: APIParameterProvider? {
 		return nil
 	}
 
-	var authenticationParams: JSON? {
+	var defaultParams: [String: Any]? {
 		return nil
 	}
 
@@ -54,11 +54,11 @@ public extension APIRouterProvider {
 		return url
 	}
 
-	var parameters: JSON? {
-		return method.modelParams(parameterProvider) + authenticationParams
+	var allParameters: [String: Any]? {
+		return method.modelParams(parameterProvider) + defaultParams
 	}
 
-	var allHeaders: JSON {
+	var allHeaders: [String: Any] {
 		return (defaultHeaders + headers)!
 	}
 
@@ -68,6 +68,6 @@ public extension APIRouterProvider {
 		request.timeoutInterval = timeoutInterval
 		allHeaders.forEach { request.setValue($1 as? String, forHTTPHeaderField: $0) }
 		request = method.appendHttpBody(for: request, with: parameterProvider)
-		return try URLEncoding.default.encode(request, with: parameters)
+		return try URLEncoding.default.encode(request, with: allParameters)
 	}
 }

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public func +(first: JSON?, second: JSON?) -> JSON? {
+public func +(first: [String: Any]?, second: [String: Any]?) -> [String: Any]? {
 	if let first = first, let second = second {
 		var dict = first
 		for (key, value) in second {
@@ -26,9 +26,9 @@ public func +(first: JSON?, second: JSON?) -> JSON? {
 
 public extension HTTPMethod {
 
-	func appendHttpBody(for request: URLRequest, with model: APIParameterProtocol?) -> URLRequest {
+	func appendHttpBody(for request: URLRequest, with model: APIParameterProvider?) -> URLRequest {
 		var mutableRequest = request
-		let params = model?.params ?? [:]
+		let params = model?.parameter ?? [:]
 		switch self {
 		case .post, .patch, .put:
 			do {
@@ -45,12 +45,12 @@ public extension HTTPMethod {
 		return mutableRequest
 	}
 
-	func modelParams(_ model: APIParameterProtocol?) -> JSON? {
+	func modelParams(_ model: APIParameterProvider?) -> [String: Any]? {
 		switch self {
 		case .post, .patch, .put:
 			return nil
 		default:
-			return model?.params
+			return model?.parameter
 		}
 	}
 }

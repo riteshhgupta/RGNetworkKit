@@ -11,10 +11,22 @@ Pod::Spec.new do |spec|
     :git => 'https://github.com/riteshhgupta/RGNetworkKit.git',
     :tag => '1.0'
   }
-  spec.ios.deployment_target = "10.0"
-  spec.source_files =  'Source/*.{swift}'
+  spec.ios.deployment_target = "9.0"
   spec.requires_arc =  true
-  spec.dependency 'Alamofire', '~> 4.3'
-  spec.dependency 'RGMapper', :git => 'https://github.com/riteshhgupta/RGMapper.git'
 
+  spec.subspec 'Core' do |core|
+    core.dependency 'Alamofire', '~> 4.5'
+    core.dependency 'RGMapper', '~> 1.0'
+    core.source_files =  'Source/**/*.swift', 'Source/**/*.xib'
+    core.exclude_files = 'Source/Reactive/*.swift'
+  end
+
+  spec.subspec 'ReactiveSwift' do |reactiveswift|    
+    reactiveswift.dependency 'RGNetworkKit/Core'
+    reactiveswift.dependency 'ReactiveSwift', '~> 3.0'
+    reactiveswift.dependency 'ReactiveCocoa', '~> 7.0'
+    reactiveswift.source_files =  'Source/**/*.swift'
+  end
+
+  spec.default_subspec = 'Core'
 end

@@ -13,6 +13,7 @@ import RGMapper
 class APIClient: APIRequestProvider {
 
 	var dataRequest: DataRequest?
+	var dataResponse: DataResponse<Data>?
 }
 
 struct APIRouter: APIRouterProvider {

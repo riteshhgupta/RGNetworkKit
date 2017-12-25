@@ -29,7 +29,6 @@ public protocol APIRouterProvider: URLRequestConvertible {
 	var headers: [String: String] { get }
 
 	/// one can provide the version of the api
-
 	var version: String? { get }
 
 	/// one can provide the timeout interval specific to app
@@ -40,9 +39,9 @@ public protocol APIRouterProvider: URLRequestConvertible {
 	var method: HTTPMethod { get }
 
 	/// one can provide the params for an api call like search query
-	/// instead of returning the dict, you need to simple return an object which conform to `APIParameterProtocol`
-	var parameterProvider: APIParameterProtocol? { get }
+	/// instead of returning the dict, you need to simple return an object which conform to `APIParameterProvider`
+	var parameterProvider: APIParameterProvider? { get }
 
 	/// one can provide the authenticated params which are specific to an app
-	var authenticationParams: JSON? { get }
+	var defaultParams: [String: Any]? { get }
 }
