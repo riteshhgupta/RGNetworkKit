@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		apiClient.dataRequest(
-			router: APIRouter(),
+			request: APIRequest(),
 			completion: handler
 		)
 //		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: { self.apiClient.cancel() })

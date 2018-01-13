@@ -10,13 +10,13 @@ import Foundation
 import Alamofire
 import RGMapper
 
-class APIClient: APIRequestProvider {
+class APIClient: APIClientProvider {}
+
+struct APIRequest: APIRequestProvider {
 
 	var dataRequest: DataRequest?
-	var dataResponse: DataResponse<Data>?
-}
 
-struct APIRouter: APIRouterProvider {
+	var dataResponse: DataResponse<Data>?
 
 	var baseURL: URL {
 		return URL(string: "https://dog.ceo/api")!

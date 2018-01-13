@@ -14,11 +14,11 @@
 		3DA9AFC81E3D12310019ED7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DA9AFC71E3D12310019ED7B /* Assets.xcassets */; };
 		3DA9AFCB1E3D12310019ED7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA9AFC91E3D12310019ED7B /* LaunchScreen.storyboard */; };
 		3DEFA24B1FF10289008B36BA /* APIParameterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2441FF10289008B36BA /* APIParameterProvider.swift */; };
-		3DEFA24D1FF10289008B36BA /* APIRequestProvider+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2461FF10289008B36BA /* APIRequestProvider+Public.swift */; };
-		3DEFA24E1FF10289008B36BA /* APIRequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2471FF10289008B36BA /* APIRequestProvider.swift */; };
+		3DEFA24D1FF10289008B36BA /* APIClientProvider+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2461FF10289008B36BA /* APIClientProvider+Public.swift */; };
+		3DEFA24E1FF10289008B36BA /* APIClientProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2471FF10289008B36BA /* APIClientProvider.swift */; };
 		3DEFA24F1FF10289008B36BA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2481FF10289008B36BA /* Helpers.swift */; };
-		3DEFA2501FF10289008B36BA /* APIRouterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2491FF10289008B36BA /* APIRouterProvider.swift */; };
-		3DEFA2511FF10289008B36BA /* APIRouterProvider+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA24A1FF10289008B36BA /* APIRouterProvider+Public.swift */; };
+		3DEFA2501FF10289008B36BA /* APIRequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2491FF10289008B36BA /* APIRequestProvider.swift */; };
+		3DEFA2511FF10289008B36BA /* APIRequestProvider+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA24A1FF10289008B36BA /* APIRequestProvider+Public.swift */; };
 		3DEFA2591FF10307008B36BA /* Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2581FF10307008B36BA /* Reactive.swift */; };
 		3DEFA2631FF13EE7008B36BA /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEFA2621FF13EE7008B36BA /* APIError.swift */; };
 		A8E5553D3622762FDD5AABE4 /* Pods_RGNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3619BF5F619268287112AE /* Pods_RGNetworkKit.framework */; };
@@ -34,11 +34,11 @@
 		3DA9AFCA1E3D12310019ED7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DA9AFCC1E3D12310019ED7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DEFA2441FF10289008B36BA /* APIParameterProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameterProvider.swift; sourceTree = "<group>"; };
-		3DEFA2461FF10289008B36BA /* APIRequestProvider+Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIRequestProvider+Public.swift"; sourceTree = "<group>"; };
-		3DEFA2471FF10289008B36BA /* APIRequestProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestProvider.swift; sourceTree = "<group>"; };
+		3DEFA2461FF10289008B36BA /* APIClientProvider+Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIClientProvider+Public.swift"; sourceTree = "<group>"; };
+		3DEFA2471FF10289008B36BA /* APIClientProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientProvider.swift; sourceTree = "<group>"; };
 		3DEFA2481FF10289008B36BA /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		3DEFA2491FF10289008B36BA /* APIRouterProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRouterProvider.swift; sourceTree = "<group>"; };
-		3DEFA24A1FF10289008B36BA /* APIRouterProvider+Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIRouterProvider+Public.swift"; sourceTree = "<group>"; };
+		3DEFA2491FF10289008B36BA /* APIRequestProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestProvider.swift; sourceTree = "<group>"; };
+		3DEFA24A1FF10289008B36BA /* APIRequestProvider+Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIRequestProvider+Public.swift"; sourceTree = "<group>"; };
 		3DEFA2581FF10307008B36BA /* Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactive.swift; sourceTree = "<group>"; };
 		3DEFA2621FF13EE7008B36BA /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		70AE25575DD155BF3966BA7F /* Pods-RGNetworkKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGNetworkKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGNetworkKit/Pods-RGNetworkKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,10 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				3DEFA2441FF10289008B36BA /* APIParameterProvider.swift */,
-				3DEFA2471FF10289008B36BA /* APIRequestProvider.swift */,
-				3DEFA2461FF10289008B36BA /* APIRequestProvider+Public.swift */,
-				3DEFA2491FF10289008B36BA /* APIRouterProvider.swift */,
-				3DEFA24A1FF10289008B36BA /* APIRouterProvider+Public.swift */,
+				3DEFA2471FF10289008B36BA /* APIClientProvider.swift */,
+				3DEFA2461FF10289008B36BA /* APIClientProvider+Public.swift */,
+				3DEFA2491FF10289008B36BA /* APIRequestProvider.swift */,
+				3DEFA24A1FF10289008B36BA /* APIRequestProvider+Public.swift */,
 				3DEFA2481FF10289008B36BA /* Helpers.swift */,
 				3DEFA2621FF13EE7008B36BA /* APIError.swift */,
 			);
@@ -279,15 +279,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DA9AFC31E3D12310019ED7B /* ViewController.swift in Sources */,
-				3DEFA2511FF10289008B36BA /* APIRouterProvider+Public.swift in Sources */,
+				3DEFA2511FF10289008B36BA /* APIRequestProvider+Public.swift in Sources */,
 				3D291F4E1F4AB55E00AA136F /* Example.swift in Sources */,
-				3DEFA24E1FF10289008B36BA /* APIRequestProvider.swift in Sources */,
+				3DEFA24E1FF10289008B36BA /* APIClientProvider.swift in Sources */,
 				3DEFA24F1FF10289008B36BA /* Helpers.swift in Sources */,
 				3DEFA2591FF10307008B36BA /* Reactive.swift in Sources */,
-				3DEFA24D1FF10289008B36BA /* APIRequestProvider+Public.swift in Sources */,
+				3DEFA24D1FF10289008B36BA /* APIClientProvider+Public.swift in Sources */,
 				3DA9AFC11E3D12310019ED7B /* AppDelegate.swift in Sources */,
 				3DEFA24B1FF10289008B36BA /* APIParameterProvider.swift in Sources */,
-				3DEFA2501FF10289008B36BA /* APIRouterProvider.swift in Sources */,
+				3DEFA2501FF10289008B36BA /* APIRequestProvider.swift in Sources */,
 				3DEFA2631FF13EE7008B36BA /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

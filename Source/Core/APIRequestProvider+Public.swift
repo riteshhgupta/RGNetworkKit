@@ -8,57 +8,74 @@
 
 import Foundation
 import Alamofire
-import RGMapper
-import enum Result.Result
 
 public extension APIRequestProvider {
 
-	public func cancel() {
-		dataRequest?.cancel()
+	var version: String? {
+		return nil
 	}
 
-	public var sessionManager: SessionManager {
-		return SessionManager.`default`
+	var path: String {
+		return ""
 	}
 
+	var method: HTTPMethod {
+		return .get
+	}
+
+	var headers: [String: String] {
+		return [:]
+	}
+
+	var defaultHeaders: [String: String] {
+		return [
+			"Content-Type": "application/json",
+			"Accept": "application/json" + (version == nil ? "" : "; version=\(version!)")
+		]
+	}
+
+	var parameterProvider: APIParameterProvider? {
+		return nil
+	}
+
+	var defaultParams: [String: Any]? {
+		return nil
+	}
+
+	var timeoutInterval: TimeInterval {
+		return 200.0
+	}
+
+	var urlWithPath: URL {
+		var url = baseURL
+		if !path.isEmpty {
+			url = baseURL.appendingPathComponent(path)
+		}
+		return url
+	}
+
+	var allParameters: [String: Any]? {
+		return method.modelParams(parameterProvider) + defaultParams
+	}
+
+	var allHeaders: [String: Any] {
+		return (defaultHeaders + headers)!
+	}
+
+	public func asURLRequest() throws -> URLRequest {
+		var request = URLRequest(url: urlWithPath)
+		request.httpMethod = method.rawValue
+		request.timeoutInterval = timeoutInterval
+		allHeaders.forEach { request.setValue($1 as? String, forHTTPHeaderField: $0) }
+		request = method.appendHttpBody(for: request, with: parameterProvider)
+		return try URLEncoding.default.encode(request, with: allParameters)
+	}
+	
 	public func parse(response: Data) throws -> Any {
 		return try JSONSerialization.jsonObject(with: response, options: .allowFragments)
 	}
-}
 
-public extension APIRequestProvider {
-	
-	public func dataRequest(router: APIRouterProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
-		dataRequest = sessionManager
-			.request(router)
-			.validate(statusCode: (200..<300))
-			.debugLog()
-			.responseData { [weak self] response in
-				guard let this = self else { return }
-				this.dataResponse = response
-				handler(response)
-		}
-	}
-	
-	public func mappableRequest<T: Mappable, E>(router: APIRouterProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void) {
-		dataRequest(router: router) { [weak self] response in
-			guard let this = self, let data = response.data else {
-				if let error = response.error { handler(Result.failure(error.apiError())) }
-				return
-			}
-			do {
-				let parsedData = try this.parse(response: data)
-				if response.result.isSuccess {
-					let mappedData: T = try parsedData^^
-					handler(Result.success(mappedData))
-				} else {
-					let mappedError: E = try parsedData^^
-					let apiError = APIError.mappedError(mappedError)
-					handler(Result.failure(apiError))
-				}
-			} catch {
-				handler(Result.failure(error.apiError()))
-			}
-		}
+	public func cancel() {
+		dataRequest?.cancel()
 	}
 }

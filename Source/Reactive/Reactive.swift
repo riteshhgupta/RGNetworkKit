@@ -14,29 +14,29 @@ import RGMapper
 import Result
 import enum Result.Result
 
-public extension APIRequestProvider {
+public extension APIClientProvider {
 	
-	public func dataRequest(router: APIRouterProvider) -> SignalProducer<DataResponse<Data>, NoError> {
+	public func dataRequest(request: APIRequestProvider) -> SignalProducer<DataResponse<Data>, NoError> {
 		return SignalProducer { [weak self] sink, disposable in
 			guard let this = self else { return }
-			this.dataRequest(router: router, completion: {
+			this.dataRequest(request: request, completion: {
 				sink.send(value: $0)
 				sink.sendCompleted()
 			})
-			disposable.observeEnded { this.cancel() }
+			disposable.observeEnded { request.cancel() }
 			}.observe(on: UIScheduler())
 	}
 	
-	public func mappableRequest<T: Mappable, E>(router: APIRouterProvider) -> SignalProducer<T, APIError<E>> {
+	public func mappableRequest<T: Mappable, E>(request: APIRequestProvider) -> SignalProducer<T, APIError<E>> {
 		return SignalProducer { [weak self] sink, disposable in
 			guard let this = self else { return }
-			this.mappableRequest(router: router, completion: { (response: Result<T, APIError<E>>) in
+			this.mappableRequest(request: request, completion: { (response: Result<T, APIError<E>>) in
 				switch response {
 				case .success(let value): sink.send(value: value)
 				case .failure(let error): sink.send(error: error)
 				}
 			})
-			disposable.observeEnded { this.cancel() }
+			disposable.observeEnded { request.cancel() }
 			}.observe(on: UIScheduler())
 	}
 }
