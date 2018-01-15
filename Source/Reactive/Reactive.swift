@@ -23,7 +23,7 @@ public extension APIClientProvider {
 				sink.send(value: $0)
 				sink.sendCompleted()
 			})
-			disposable.observeEnded { request.cancel() }
+			disposable.observeEnded { }
 			}.observe(on: UIScheduler())
 	}
 	
@@ -36,7 +36,7 @@ public extension APIClientProvider {
 				case .failure(let error): sink.send(error: error)
 				}
 			})
-			disposable.observeEnded { request.cancel() }
+			disposable.observeEnded { }
 			}.observe(on: UIScheduler())
 	}
 }

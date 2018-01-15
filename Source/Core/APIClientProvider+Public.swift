@@ -47,7 +47,8 @@ public extension APIClientProvider {
 					handler(Result.failure(apiError))
 				}
 			} catch {
-				handler(Result.failure(error.apiError()))
+				let _error = response.error ?? error
+				handler(Result.failure(_error.apiError()))
 			}
 		}
 	}
