@@ -74,8 +74,4 @@ public extension APIRequestProvider {
 	public func parse(response: Data) throws -> Any {
 		return try JSONSerialization.jsonObject(with: response, options: .allowFragments)
 	}
-
-	public func cancel() {
-		dataRequest?.cancel()
-	}
 }

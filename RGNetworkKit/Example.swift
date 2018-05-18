@@ -10,13 +10,12 @@ import Foundation
 import Alamofire
 import RGMapper
 
-class APIClient: APIClientProvider {}
+class APIClient: APIClientProvider {
+
+	var currentRequest: Request?
+}
 
 struct APIRequest: APIRequestProvider {
-
-	var dataRequest: DataRequest?
-
-	var dataResponse: DataResponse<Data>?
 
 	var baseURL: URL {
 		return URL(string: "https://dog.ceo/api")!
@@ -28,9 +27,27 @@ struct APIRequest: APIRequestProvider {
 
 struct User: Mappable {
 
-	let name: String = "Ritesh"
+	let name: String
 
-	static func map(_ value: Any?) throws -> User {
-		return User()
+	static func map(_ mapper: Mapper) throws -> User {
+//		let images: [String] = try mapper["message"]|^
+//		let name = images.first!
+
+//		let name: String = try mapper["status"]^^
+
+		let name = "Ritesh"
+
+		return User(name: name)
+	}
+}
+
+struct ResponseError {}
+
+extension ResponseError: Error {}
+
+extension ResponseError: Mappable {
+
+	static func map(_ mapper: Mapper) throws -> ResponseError {
+		return ResponseError()
 	}
 }

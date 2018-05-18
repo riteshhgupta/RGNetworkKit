@@ -18,4 +18,5 @@ import RGMapper
 public protocol APIClientProvider: class {
 
 	var sessionManager: SessionManager { get }
+	var currentRequest: Request? { get set }
 }

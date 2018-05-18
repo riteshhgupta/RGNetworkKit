@@ -23,8 +23,9 @@ public extension APIClientProvider {
 				sink.send(value: $0)
 				sink.sendCompleted()
 			})
-			disposable.observeEnded { }
-			}.observe(on: UIScheduler())
+			disposable.observeEnded { self?.currentRequest?.cancel() }
+			}
+			.observe(on: UIScheduler())
 	}
 	
 	public func mappableRequest<T: Mappable, E>(request: APIRequestProvider) -> SignalProducer<T, APIError<E>> {
@@ -32,11 +33,15 @@ public extension APIClientProvider {
 			guard let this = self else { return }
 			this.mappableRequest(request: request, completion: { (response: Result<T, APIError<E>>) in
 				switch response {
-				case .success(let value): sink.send(value: value)
-				case .failure(let error): sink.send(error: error)
+				case .success(let value):
+					sink.send(value: value)
+				case .failure(let error):
+					sink.send(error: error)
 				}
+				sink.sendCompleted()
 			})
-			disposable.observeEnded { }
-			}.observe(on: UIScheduler())
+			disposable.observeEnded { self?.currentRequest?.cancel() }
+			}
+			.observe(on: UIScheduler())
 	}
 }

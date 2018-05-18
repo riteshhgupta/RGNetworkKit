@@ -13,42 +13,48 @@ import enum Result.Result
 
 public extension APIClientProvider {
 
-	public var sessionManager: SessionManager { return .default }
+	public var sessionManager: SessionManager {
+		return .default
+	}
+
+	public func cancel() {
+		currentRequest?.cancel()
+	}
 }
 
 public extension APIClientProvider {
 	
 	public func dataRequest(request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
-		var _request = request
-		_request.dataRequest = sessionManager
-			.request(_request)
+		currentRequest = sessionManager
+			.request(request)
 			.validate(statusCode: (200..<300))
 			.debugLog()
 			.responseData { response in
-				_request.dataResponse = response
 				handler(response)
 		}
 	}
 	
 	public func mappableRequest<T: Mappable, E>(request: APIRequestProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void) {
 		dataRequest(request: request) { response in
-			guard let data = response.data else {
-				if let error = response.error { handler(Result.failure(error.apiError())) }
+			guard let data = response.data, !data.isEmpty else {
+				if let error = response.error {
+					handler(Result.failure(error.apiError()))
+				}
 				return
 			}
 			do {
 				let parsedData = try request.parse(response: data)
+				let mapper = Mapper(parsedData)
 				if response.result.isSuccess {
-					let mappedData: T = try parsedData^^
+					let mappedData: T = try mapper^^
 					handler(Result.success(mappedData))
 				} else {
-					let mappedError: E = try parsedData^^
+					let mappedError: E = try mapper^^
 					let apiError = APIError.mappedError(mappedError)
 					handler(Result.failure(apiError))
 				}
 			} catch {
-				let _error = response.error ?? error
-				handler(Result.failure(_error.apiError()))
+				handler(Result.failure(error.apiError()))
 			}
 		}
 	}

@@ -15,11 +15,28 @@ public enum APIError<E: Mappable & Error> {
 	case error(Error)
 }
 
+extension APIError {
+
+	var error: Error {
+		switch self {
+		case .error(let error): return error
+		case .mappedError(let error): return error
+		}
+	}
+}
+
 extension APIError: Error {}
+
+extension APIError: LocalizedError {
+
+	public var localizedDescription: String {
+		return error.localizedDescription
+	}
+}
 
 public extension Error {
 	
 	func apiError<E: Mappable & Error>() -> APIError<E> {
-		return APIError<E>.error(self)
+		return .error(self)
 	}
 }
