@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 import RGMapper
 
-class APIClient: APIClientProvider {
+class APIClient: MappableAPIClientProvider {
 
-	var currentRequest: Request?
+	var currentRequests: [(APIRequestProvider, Request)] = []
 }
 
 struct APIRequest: APIRequestProvider {
@@ -30,13 +30,7 @@ struct User: Mappable {
 	let name: String
 
 	static func map(_ mapper: Mapper) throws -> User {
-//		let images: [String] = try mapper["message"]|^
-//		let name = images.first!
-
-//		let name: String = try mapper["status"]^^
-
-		let name = "Ritesh"
-
+		let name: String = try mapper["status"]^^
 		return User(name: name)
 	}
 }

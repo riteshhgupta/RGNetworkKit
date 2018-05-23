@@ -5,7 +5,7 @@ PODS:
   - ReactiveSwift (3.1.0):
     - Result (~> 3.2)
   - Result (3.2.4)
-  - RGMapper (2.0)
+  - RGMapper (2.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -26,7 +26,7 @@ SPEC CHECKSUMS:
   ReactiveCocoa: 476dae7ca790f40d30d186a1bd7ebae4290395d5
   ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  RGMapper: 582eea90d71f7ce43b1dca4d692b1c92f2fdec03
+  RGMapper: 5f4550f8fceb91e700203bb3ae71cf78a1bd215f
 
 PODFILE CHECKSUM: ea2ef7b98469f468d85cce37c96db1c183ae779a
 

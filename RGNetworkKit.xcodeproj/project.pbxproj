@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3D291F4E1F4AB55E00AA136F /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D291F4D1F4AB55E00AA136F /* Example.swift */; };
+		3D5CA95F20B5510F00E93E1A /* MappableAPIClientProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5CA95E20B5510F00E93E1A /* MappableAPIClientProvider.swift */; };
+		3D5CA96120B55D0A00E93E1A /* MappableAPIClientProvider+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5CA96020B55D0A00E93E1A /* MappableAPIClientProvider+Public.swift */; };
+		3D5CA96320B57BE700E93E1A /* Request+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5CA96220B57BE700E93E1A /* Request+Public.swift */; };
+		3D5CA96520B57C0700E93E1A /* DataResponse+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5CA96420B57C0700E93E1A /* DataResponse+Public.swift */; };
+		3D6487CE20BD0CEA001B7820 /* HTTPMethod+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6487CD20BD0CEA001B7820 /* HTTPMethod+Internal.swift */; };
+		3D9FA19220BA87EA005C78CA /* RGNetworkKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FA19120BA87EA005C78CA /* RGNetworkKitError.swift */; };
+		3D9FA19420BA8801005C78CA /* APIRequestProvider+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FA19320BA8801005C78CA /* APIRequestProvider+Internal.swift */; };
 		3DA9AFC11E3D12310019ED7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA9AFC01E3D12310019ED7B /* AppDelegate.swift */; };
 		3DA9AFC31E3D12310019ED7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA9AFC21E3D12310019ED7B /* ViewController.swift */; };
 		3DA9AFC61E3D12310019ED7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA9AFC41E3D12310019ED7B /* Main.storyboard */; };
@@ -26,6 +33,13 @@
 
 /* Begin PBXFileReference section */
 		3D291F4D1F4AB55E00AA136F /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
+		3D5CA95E20B5510F00E93E1A /* MappableAPIClientProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappableAPIClientProvider.swift; sourceTree = "<group>"; };
+		3D5CA96020B55D0A00E93E1A /* MappableAPIClientProvider+Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MappableAPIClientProvider+Public.swift"; sourceTree = "<group>"; };
+		3D5CA96220B57BE700E93E1A /* Request+Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Public.swift"; sourceTree = "<group>"; };
+		3D5CA96420B57C0700E93E1A /* DataResponse+Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataResponse+Public.swift"; sourceTree = "<group>"; };
+		3D6487CD20BD0CEA001B7820 /* HTTPMethod+Internal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPMethod+Internal.swift"; sourceTree = "<group>"; };
+		3D9FA19120BA87EA005C78CA /* RGNetworkKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkKitError.swift; sourceTree = "<group>"; };
+		3D9FA19320BA8801005C78CA /* APIRequestProvider+Internal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIRequestProvider+Internal.swift"; sourceTree = "<group>"; };
 		3DA9AFBD1E3D12310019ED7B /* RGNetworkKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGNetworkKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA9AFC01E3D12310019ED7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DA9AFC21E3D12310019ED7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,12 +118,19 @@
 			isa = PBXGroup;
 			children = (
 				3DEFA2441FF10289008B36BA /* APIParameterProvider.swift */,
-				3DEFA2471FF10289008B36BA /* APIClientProvider.swift */,
-				3DEFA2461FF10289008B36BA /* APIClientProvider+Public.swift */,
 				3DEFA2491FF10289008B36BA /* APIRequestProvider.swift */,
 				3DEFA24A1FF10289008B36BA /* APIRequestProvider+Public.swift */,
-				3DEFA2481FF10289008B36BA /* Helpers.swift */,
+				3D9FA19320BA8801005C78CA /* APIRequestProvider+Internal.swift */,
+				3DEFA2471FF10289008B36BA /* APIClientProvider.swift */,
+				3DEFA2461FF10289008B36BA /* APIClientProvider+Public.swift */,
+				3D5CA95E20B5510F00E93E1A /* MappableAPIClientProvider.swift */,
+				3D5CA96020B55D0A00E93E1A /* MappableAPIClientProvider+Public.swift */,
+				3D5CA96220B57BE700E93E1A /* Request+Public.swift */,
+				3D5CA96420B57C0700E93E1A /* DataResponse+Public.swift */,
+				3D6487CD20BD0CEA001B7820 /* HTTPMethod+Internal.swift */,
 				3DEFA2621FF13EE7008B36BA /* APIError.swift */,
+				3D9FA19120BA87EA005C78CA /* RGNetworkKitError.swift */,
+				3DEFA2481FF10289008B36BA /* Helpers.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -263,15 +284,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DA9AFC31E3D12310019ED7B /* ViewController.swift in Sources */,
+				3D5CA96520B57C0700E93E1A /* DataResponse+Public.swift in Sources */,
 				3DEFA2511FF10289008B36BA /* APIRequestProvider+Public.swift in Sources */,
+				3D9FA19420BA8801005C78CA /* APIRequestProvider+Internal.swift in Sources */,
 				3D291F4E1F4AB55E00AA136F /* Example.swift in Sources */,
 				3DEFA24E1FF10289008B36BA /* APIClientProvider.swift in Sources */,
+				3D5CA96120B55D0A00E93E1A /* MappableAPIClientProvider+Public.swift in Sources */,
+				3D5CA95F20B5510F00E93E1A /* MappableAPIClientProvider.swift in Sources */,
+				3D9FA19220BA87EA005C78CA /* RGNetworkKitError.swift in Sources */,
 				3DEFA24F1FF10289008B36BA /* Helpers.swift in Sources */,
 				3DEFA2591FF10307008B36BA /* Reactive.swift in Sources */,
 				3DEFA24D1FF10289008B36BA /* APIClientProvider+Public.swift in Sources */,
 				3DA9AFC11E3D12310019ED7B /* AppDelegate.swift in Sources */,
 				3DEFA24B1FF10289008B36BA /* APIParameterProvider.swift in Sources */,
 				3DEFA2501FF10289008B36BA /* APIRequestProvider.swift in Sources */,
+				3D6487CE20BD0CEA001B7820 /* HTTPMethod+Internal.swift in Sources */,
+				3D5CA96320B57BE700E93E1A /* Request+Public.swift in Sources */,
 				3DEFA2631FF13EE7008B36BA /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -397,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

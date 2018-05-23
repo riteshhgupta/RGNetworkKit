@@ -14,33 +14,55 @@ import RGMapper
 import Result
 import enum Result.Result
 
-public extension APIClientProvider {
-	
-	public func dataRequest(request: APIRequestProvider) -> SignalProducer<DataResponse<Data>, NoError> {
+// `ReactiveAPIClientProvider` is reactive version of `MappableAPIClientProvider`
+// it uses the same underlying logic of `MappableAPIClientProvider`
+// instead of closures, it returns a signal producer
+public protocol ReactiveAPIClientProvider: MappableAPIClientProvider {
+
+	// corresponding reactive layer of closure based `responseHandler`
+	func responseHandler(for request: APIRequestProvider) -> SignalProducer<DataResponse<Data>, NoError>
+
+	// corresponding reactive layer of closure based `mappedResponseHandler`
+	func mappedResponseHandler<T: Mappable, E>(for request: APIRequestProvider) -> SignalProducer<T, APIError<E>>
+}
+
+public extension ReactiveAPIClientProvider {
+
+	// default implementation of `responseHandler`
+	// it simply converts values from closure to a stream of values
+	// it returns the value on UI thread
+	// automatically cancels the request once the stream gets disposed
+	public func responseHandler(request: APIRequestProvider) -> SignalProducer<DataResponse<Data>, NoError> {
 		return SignalProducer { [weak self] sink, disposable in
 			guard let this = self else { return }
-			this.dataRequest(request: request, completion: {
+			this.responseHandler(for: request, completion: {
 				sink.send(value: $0)
 				sink.sendCompleted()
 			})
-			disposable.observeEnded { self?.currentRequest?.cancel() }
+			disposable
+				.observeEnded { self?.cancel(request: request) }
 			}
 			.observe(on: UIScheduler())
 	}
-	
-	public func mappableRequest<T: Mappable, E>(request: APIRequestProvider) -> SignalProducer<T, APIError<E>> {
+
+	// default implementation of `mappedResponseHandler`
+	// it simply converts values from closure to a stream of values
+	// it returns the value on UI thread
+	// automatically cancels the request once the stream gets disposed
+	public func mappedResponseHandler<T: Mappable, E>(request: APIRequestProvider) -> SignalProducer<T, APIError<E>> {
 		return SignalProducer { [weak self] sink, disposable in
 			guard let this = self else { return }
-			this.mappableRequest(request: request, completion: { (response: Result<T, APIError<E>>) in
+			this.mappedResponseHandler(for: request, completion: { (response: Result<T, APIError<E>>) in
 				switch response {
 				case .success(let value):
 					sink.send(value: value)
+					sink.sendCompleted()
 				case .failure(let error):
 					sink.send(error: error)
 				}
-				sink.sendCompleted()
 			})
-			disposable.observeEnded { self?.currentRequest?.cancel() }
+			disposable
+				.observeEnded { self?.cancel(request: request) }
 			}
 			.observe(on: UIScheduler())
 	}

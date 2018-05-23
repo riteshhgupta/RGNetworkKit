@@ -8,15 +8,23 @@
 
 import Foundation
 import Alamofire
-import RGMapper
 
-/// create an object which conforms to `APIRequestProvider`
-/// use `request(router: handler:)` to make an api call
-/// type of the handler will decide which request function will be called
-/// all the requirements of `APIRequestProvider` have default implementations except `dataRequest`
+/// `APIClientProvider` wraps the structure of an api client
+/// use `responseHandler(request: handler:)` to execute an api call
+/// all the requirements of `APIClientProvider` have default implementations except `currentRequests`
 
 public protocol APIClientProvider: class {
 
+	// alamofire session manager
 	var sessionManager: SessionManager { get }
-	var currentRequest: Request? { get set }
+
+	// cancel a request
+	func cancel(request: APIRequestProvider)
+
+	// execute a request and handle it's response
+	func responseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void)
+
+	// not to be used externally, only for internal implementation
+	// protocols can't have private properties so ¯\_(ツ)_/¯
+	var currentRequests: [(APIRequestProvider, Request)] { get set }
 }

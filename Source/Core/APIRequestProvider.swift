@@ -16,7 +16,6 @@ public protocol APIRequestProvider: URLRequestConvertible {
 
 	/// it's that component of a url which is common to all the api calls e.g. "https://dog.ceo/api"
 	/// it's the only required property to make a complete router object, 
-	/// rest all have some default implementations
 
 	var baseURL: URL { get }
 
@@ -46,5 +45,5 @@ public protocol APIRequestProvider: URLRequestConvertible {
 	var defaultParams: [String: Any]? { get }
 	
 	/// implement this method to provide custom parsing logic for response, by default it uses `JSONSerialization.jsonObject(:)`
-	func parse(response: Data) throws -> Any
+	func parse(response: DataResponse<Data>) throws -> Any
 }

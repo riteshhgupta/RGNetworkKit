@@ -9,34 +9,36 @@
 import Foundation
 import RGMapper
 
+// RGNetwork returns APIError which has two cases ––
+// 1. `mappedError` which returns a custom error from server (conforming to `Mappable`)
+// 2. `error` which returns errors like no internet or something generated via alamofire
 public enum APIError<E: Mappable & Error> {
-	
+
+// custom mappable error
 	case mappedError(E)
+
+// generic error like no internet etc
 	case error(Error)
 }
 
-extension APIError {
+// `APIError` conforms to `Error` so that it's throwable
+extension APIError: Error {}
 
-	var error: Error {
+// `APIError` conforms to `LocalizedError` so that it can return associated `localizedDescription`
+extension APIError: LocalizedError {
+
+	public var localizedDescription: String {
+		return errorValue.localizedDescription
+	}
+}
+
+public extension APIError {
+
+// it returns the underlying error
+	var errorValue: Error {
 		switch self {
 		case .error(let error): return error
 		case .mappedError(let error): return error
 		}
-	}
-}
-
-extension APIError: Error {}
-
-extension APIError: LocalizedError {
-
-	public var localizedDescription: String {
-		return error.localizedDescription
-	}
-}
-
-public extension Error {
-	
-	func apiError<E: Mappable & Error>() -> APIError<E> {
-		return .error(self)
 	}
 }

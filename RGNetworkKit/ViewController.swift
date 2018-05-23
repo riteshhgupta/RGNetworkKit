@@ -17,11 +17,18 @@ class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		apiClient.mappableRequest(
-			request: APIRequest(),
+
+// 	How to make a request?
+		let req = APIRequest()
+
+//	How to execute a request?
+		apiClient.mappedResponseHandler(
+			for: req,
 			completion: handler
 		)
-//		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: { self.apiClient.cancel() })
+
+//		How to cancel a request?
+//		self.apiClient.cancel(request: req)
 	}
 
 /// simplest form of handler which gives you alamofire object `DataResponse<Data>` as response
@@ -38,7 +45,7 @@ class ViewController: UIViewController {
 
 	var handler: (Result<User, APIError<ResponseError>>) -> Void {
 		return { (result) in
-			print(result.error?.localizedDescription)
+			print(result)
 		}
 	}
 }

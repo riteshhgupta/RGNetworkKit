@@ -27,13 +27,6 @@ public extension APIRequestProvider {
 		return [:]
 	}
 
-	var defaultHeaders: [String: String] {
-		return [
-			"Content-Type": "application/json",
-			"Accept": "application/json" + (version == nil ? "" : "; version=\(version!)")
-		]
-	}
-
 	var parameterProvider: APIParameterProvider? {
 		return nil
 	}
@@ -46,22 +39,6 @@ public extension APIRequestProvider {
 		return 200.0
 	}
 
-	var urlWithPath: URL {
-		var url = baseURL
-		if !path.isEmpty {
-			url = baseURL.appendingPathComponent(path)
-		}
-		return url
-	}
-
-	var allParameters: [String: Any]? {
-		return method.modelParams(parameterProvider) + defaultParams
-	}
-
-	var allHeaders: [String: Any] {
-		return (defaultHeaders + headers)!
-	}
-
 	public func asURLRequest() throws -> URLRequest {
 		var request = URLRequest(url: urlWithPath)
 		request.httpMethod = method.rawValue
@@ -71,7 +48,8 @@ public extension APIRequestProvider {
 		return try URLEncoding.default.encode(request, with: allParameters)
 	}
 	
-	public func parse(response: Data) throws -> Any {
-		return try JSONSerialization.jsonObject(with: response, options: .allowFragments)
+	public func parse(response: DataResponse<Data>) throws -> Any {
+		guard let data = response.data else { throw RGNetworkKitError.noData }
+		return try JSONSerialization.jsonObject(with: data, options: .allowFragments)
 	}
 }

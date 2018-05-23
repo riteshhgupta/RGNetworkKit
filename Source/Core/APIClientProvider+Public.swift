@@ -8,54 +8,32 @@
 
 import Foundation
 import Alamofire
-import RGMapper
-import enum Result.Result
+
+// default implementations of `APIClientProvider`
 
 public extension APIClientProvider {
 
+	// `.default` is a shared instance of `SessionManager`, one can pass a new instance as well
 	public var sessionManager: SessionManager {
 		return .default
 	}
 
-	public func cancel() {
-		currentRequest?.cancel()
+	// `urlWithPath` is checked to match two requests
+	func cancel(request: APIRequestProvider) {
+		guard let index = currentRequests.index(where: { $0.0.urlWithPath == request.urlWithPath }) else { return }
+		currentRequests[index].1.cancel()
 	}
-}
 
-public extension APIClientProvider {
-	
-	public func dataRequest(request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
-		currentRequest = sessionManager
+	// `responseData` is executed which returns `Data` as a response from server
+	// it applies a validation on status code i.e. anything between 200..300 is a valid response
+	func responseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
+		let dataRequest = sessionManager
 			.request(request)
 			.validate(statusCode: (200..<300))
 			.debugLog()
-			.responseData { response in
-				handler(response)
-		}
-	}
-	
-	public func mappableRequest<T: Mappable, E>(request: APIRequestProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void) {
-		dataRequest(request: request) { response in
-			guard let data = response.data, !data.isEmpty else {
-				if let error = response.error {
-					handler(Result.failure(error.apiError()))
-				}
-				return
-			}
-			do {
-				let parsedData = try request.parse(response: data)
-				let mapper = Mapper(parsedData)
-				if response.result.isSuccess {
-					let mappedData: T = try mapper^^
-					handler(Result.success(mappedData))
-				} else {
-					let mappedError: E = try mapper^^
-					let apiError = APIError.mappedError(mappedError)
-					handler(Result.failure(apiError))
-				}
-			} catch {
-				handler(Result.failure(error.apiError()))
-			}
-		}
+			.responseData(completionHandler: handler)
+		currentRequests.append(
+			(request, dataRequest)
+		)
 	}
 }

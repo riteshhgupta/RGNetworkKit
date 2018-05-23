@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// `APIRouterProvider` requires an object which conform to `APIParameterProvider`
-/// it provides the parameters to `APIRouterProvider`
+/// `APIParameterProvider` provides the parameters to `APIRouterProvider`
+/// `APIRouterProvider` requires an object which conforms to `APIParameterProvider`
 
 public protocol APIParameterProvider {
 
