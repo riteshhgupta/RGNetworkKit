@@ -23,3 +23,16 @@ func +(first: [String: Any]?, second: [String: Any]?) -> [String: Any]? {
 	}
 	return nil
 }
+
+extension Dictionary where Key: Hashable {
+
+	func compactMap<T>(_ transform: (Value) -> T?) -> [Key: T] {
+		var newDict: [Key: T] = [:]
+		forEach {
+			if let value = transform($0.value) {
+				newDict[$0.key] = value
+			}
+		}
+		return newDict
+	}
+}

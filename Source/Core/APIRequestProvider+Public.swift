@@ -39,15 +39,19 @@ public extension APIRequestProvider {
 		return 200.0
 	}
 
+	var isMultipart: Bool {
+		return false
+	}
+
 	public func asURLRequest() throws -> URLRequest {
 		var request = URLRequest(url: urlWithPath)
 		request.httpMethod = method.rawValue
 		request.timeoutInterval = timeoutInterval
 		allHeaders.forEach { request.setValue($1 as? String, forHTTPHeaderField: $0) }
-		request = method.appendHttpBody(for: request, with: parameterProvider)
+		if !isMultipart { request = method.appendHttpBody(for: request, with: parameterProvider) }
 		return try URLEncoding.default.encode(request, with: allParameters)
 	}
-	
+
 	public func parse(response: DataResponse<Data>) throws -> Any {
 		guard let data = response.data else { throw RGNetworkKitError.noData }
 		return try JSONSerialization.jsonObject(with: data, options: .allowFragments)

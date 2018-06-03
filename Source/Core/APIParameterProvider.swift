@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 /// `APIParameterProvider` provides the parameters to `APIRouterProvider`
 /// `APIRouterProvider` requires an object which conforms to `APIParameterProvider`
@@ -14,4 +15,12 @@ import Foundation
 public protocol APIParameterProvider {
 
 	var parameter: [String: Any] { get }
+	var multipartFormParameters: [String: MultipartFormDataProvider] { get }
+}
+
+public extension APIParameterProvider {
+
+	var multipartFormParameters: [String: MultipartFormDataProvider] {
+		return parameter.compactMap { $0 as? MultipartFormDataProvider }
+	}
 }

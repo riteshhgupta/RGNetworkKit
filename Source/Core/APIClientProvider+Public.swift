@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import Result
+import enum Alamofire.Result
 
 // default implementations of `APIClientProvider`
 
@@ -24,16 +26,31 @@ public extension APIClientProvider {
 		currentRequests[index].1.cancel()
 	}
 
-	// `responseData` is executed which returns `Data` as a response from server
+	// `responseHandler` when executed returns `Data` as a response from server
 	// it applies a validation on status code i.e. anything between 200..300 is a valid response
 	func responseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
-		let dataRequest = sessionManager
-			.request(request)
-			.validate(statusCode: (200..<300))
-			.debugLog()
-			.responseData(completionHandler: handler)
-		currentRequests.append(
-			(request, dataRequest)
+		let dataRequest = sessionManager.request(request)
+		requestWorker(
+			for: request,
+			dataRequest: dataRequest,
+			completion: handler
+		)
+	}
+
+	// `multipartResponseHandler` when executed returns `Data` as a response from server
+	// it applies a validation on status code i.e. anything between 200..300 is a valid response
+	func multipartResponseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
+		let executeRequestHandler: (DataRequest) -> Void = { dataRequest in
+			self.requestWorker(
+				for: request,
+				dataRequest: dataRequest,
+				completion: handler
+			)
+		}
+		sessionManager.upload(
+			with: request,
+			execute: executeRequestHandler,
+			completion: handler
 		)
 	}
 }

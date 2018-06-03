@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import Result
+import enum Result.Result
 
 /// `APIClientProvider` wraps the structure of an api client
 /// use `responseHandler(request: handler:)` to execute an api call
@@ -23,6 +25,9 @@ public protocol APIClientProvider: class {
 
 	// execute a request and handle it's response
 	func responseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void)
+
+	// execute a multipart request and handle it's response
+	func multipartResponseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void)
 
 	// not to be used externally, only for internal implementation
 	// protocols can't have private properties so ¯\_(ツ)_/¯

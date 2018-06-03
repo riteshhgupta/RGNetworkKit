@@ -43,6 +43,9 @@ public protocol APIRequestProvider: URLRequestConvertible {
 
 	/// one can provide the authenticated params which are specific to an app
 	var defaultParams: [String: Any]? { get }
+
+	/// to support multi-part requests
+	var isMultipart: Bool { get }
 	
 	/// implement this method to provide custom parsing logic for response, by default it uses `JSONSerialization.jsonObject(:)`
 	func parse(response: DataResponse<Data>) throws -> Any

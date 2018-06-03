@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 extension APIRequestProvider {
 
@@ -31,5 +32,14 @@ extension APIRequestProvider {
 			url = baseURL.appendingPathComponent(path)
 		}
 		return url
+	}
+
+	var multipartFormData: (MultipartFormData) -> Void {
+		return { (data) in
+			self
+				.parameterProvider?
+				.multipartFormParameters
+				.forEach { $0.value.appendTo(data, for: $0.key) }
+		}
 	}
 }

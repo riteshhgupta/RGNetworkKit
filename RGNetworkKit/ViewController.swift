@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import RGMapper
 import enum Result.Result
+import ReactiveSwift
+import ReactiveCocoa
 
 class ViewController: UIViewController {
 
