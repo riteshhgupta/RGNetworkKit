@@ -26,6 +26,17 @@ public extension MappableAPIClientProvider {
 		}
 	}
 
+	func mappedMultipartResponseHandler<T: Mappable, E>(for request: APIRequestProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void) {
+		multipartResponseHandler(for: request) { [weak self] (response) in
+			guard let this = self else { return }
+			if response.result.isSuccess {
+				handler(this.mapData(response: response, for: request))
+			} else {
+				handler(this.mapError(response: response, for: request))
+			}
+		}
+	}
+
 	// default parsing + mapping of json response
 	func mapData<T: Mappable, E>(response: DataResponse<Data>, for request: APIRequestProvider) -> Result<T, APIError<E>> {
 		do {
@@ -59,10 +70,6 @@ public extension MappableAPIClientProvider {
 fileprivate extension DataResponse {
 
 	var shouldParseData: Bool {
-		guard
-			isJSONResponse,
-			hasData
-			else { return false }
-		return true
+		return isJSONResponse && hasData
 	}
 }

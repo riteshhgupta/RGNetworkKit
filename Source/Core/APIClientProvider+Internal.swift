@@ -13,13 +13,15 @@ import enum Result.Result
 
 extension APIClientProvider {
 
-	func requestWorker(for request: APIRequestProvider, dataRequest: DataRequest, completion handler: @escaping (DataResponse<Data>) -> Void) {
+	func requestWorker(
+		for request: APIRequestProvider,
+		dataRequest: DataRequest,
+		completion handler: @escaping (DataResponse<Data>) -> Void)
+	{
 		dataRequest
 			.validate(statusCode: (200..<300))
 			.debugLog()
 			.responseData(completionHandler: handler)
-		currentRequests.append(
-			(request, dataRequest)
-		)
+		currentRequests.append((request, dataRequest))
 	}
 }

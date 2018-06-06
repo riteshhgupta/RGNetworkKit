@@ -24,6 +24,12 @@ public protocol ReactiveAPIClientProvider: MappableAPIClientProvider {
 
 	// corresponding reactive layer of closure based `mappedResponseHandler`
 	func mappedResponseHandler<T: Mappable, E>(for request: APIRequestProvider) -> SignalProducer<T, APIError<E>>
+
+	// corresponding reactive layer of closure based `multipartResponseHandler`
+	func multipartResponseHandler(for request: APIRequestProvider) -> SignalProducer<DataResponse<Data>, NoError>
+
+	// corresponding reactive layer of closure based `mappedMultipartResponseHandler`
+	func mappedMultipartResponseHandler<T: Mappable, E>(for request: APIRequestProvider) -> SignalProducer<T, APIError<E>>
 }
 
 public extension ReactiveAPIClientProvider {
@@ -45,6 +51,19 @@ public extension ReactiveAPIClientProvider {
 			.observe(on: UIScheduler())
 	}
 
+	public func multipartResponseHandler(request: APIRequestProvider) -> SignalProducer<DataResponse<Data>, NoError> {
+		return SignalProducer { [weak self] sink, disposable in
+			guard let this = self else { return }
+			this.multipartResponseHandler(for: request, completion: {
+				sink.send(value: $0)
+				sink.sendCompleted()
+			})
+			disposable
+				.observeEnded { self?.cancel(request: request) }
+			}
+			.observe(on: UIScheduler())
+	}
+
 	// default implementation of `mappedResponseHandler`
 	// it simply converts values from closure to a stream of values
 	// it returns the value on UI thread
@@ -53,6 +72,24 @@ public extension ReactiveAPIClientProvider {
 		return SignalProducer { [weak self] sink, disposable in
 			guard let this = self else { return }
 			this.mappedResponseHandler(for: request, completion: { (response: Result<T, APIError<E>>) in
+				switch response {
+				case .success(let value):
+					sink.send(value: value)
+					sink.sendCompleted()
+				case .failure(let error):
+					sink.send(error: error)
+				}
+			})
+			disposable
+				.observeEnded { self?.cancel(request: request) }
+			}
+			.observe(on: UIScheduler())
+	}
+
+	public func mappedMultipartResponseHandler<T: Mappable, E>(request: APIRequestProvider) -> SignalProducer<T, APIError<E>> {
+		return SignalProducer { [weak self] sink, disposable in
+			guard let this = self else { return }
+			this.mappedMultipartResponseHandler(for: request, completion: { (response: Result<T, APIError<E>>) in
 				switch response {
 				case .success(let value):
 					sink.send(value: value)

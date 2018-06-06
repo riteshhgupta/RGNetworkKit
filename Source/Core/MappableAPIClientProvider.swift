@@ -21,6 +21,9 @@ public protocol MappableAPIClientProvider: APIClientProvider {
 	// handle how to parse and map an invalid response
 	func mapError<T: Mappable, E>(response: DataResponse<Data>, for request: APIRequestProvider) -> Result<T, APIError<E>>
 
-	// handle how to decide whether a response is valid or invalid
+	// execute a request and handle it's response
 	func mappedResponseHandler<T: Mappable, E>(for request: APIRequestProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void)
+
+	// execute a multipart request and handle it's response
+	func mappedMultipartResponseHandler<T: Mappable, E>(for request: APIRequestProvider, completion handler: @escaping (Result<T, APIError<E>>) -> Void)
 }

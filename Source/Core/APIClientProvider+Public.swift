@@ -40,16 +40,14 @@ public extension APIClientProvider {
 	// `multipartResponseHandler` when executed returns `Data` as a response from server
 	// it applies a validation on status code i.e. anything between 200..300 is a valid response
 	func multipartResponseHandler(for request: APIRequestProvider, completion handler: @escaping (DataResponse<Data>) -> Void) {
-		let executeRequestHandler: (DataRequest) -> Void = { dataRequest in
-			self.requestWorker(
-				for: request,
-				dataRequest: dataRequest,
-				completion: handler
-			)
-		}
 		sessionManager.upload(
 			with: request,
-			execute: executeRequestHandler,
+			execute: { dataRequest in
+				self.requestWorker(
+					for: request,
+					dataRequest: dataRequest,
+					completion: handler
+				)},
 			completion: handler
 		)
 	}

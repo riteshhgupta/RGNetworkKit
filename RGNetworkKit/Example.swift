@@ -18,10 +18,10 @@ class APIClient: MappableAPIClientProvider {
 struct APIRequest: APIRequestProvider {
 
 	var baseURL: URL {
-		return URL(string: "https://dog.ceo/api")!
+		return URL(string: "https://api.imgur.com/3")!
 	}
 	var path: String {
-		return "/breed/hound/images"
+		return "/galleryy.json"
 	}
 }
 
@@ -30,18 +30,31 @@ struct User: Mappable {
 	let name: String
 
 	static func map(_ mapper: Mapper) throws -> User {
-		let name: String = try mapper["status"]^^
-		return User(name: name)
+		return User(
+			name: try mapper["status"]^^
+		)
 	}
 }
 
-struct ResponseError {}
+struct ResponseError {
 
-extension ResponseError: Error {}
+	let message: String
+	let request: String
+}
+
+extension ResponseError: MappableErrorProtocol {
+
+	var localizedMessage: String {
+		return message
+	}
+}
 
 extension ResponseError: Mappable {
 
 	static func map(_ mapper: Mapper) throws -> ResponseError {
-		return ResponseError()
+		return ResponseError(
+			message: try mapper["data"]["error"]^^,
+			request: try mapper["data"]["request"]^^
+		)
 	}
 }

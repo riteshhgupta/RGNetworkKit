@@ -22,6 +22,15 @@ public extension DataResponse {
 	}
 
 	var hasData: Bool {
-		return data?.isEmpty ?? false
+		guard let data = self.data else { return false }
+		return !data.isEmpty
+	}
+
+	var json: Any? {
+		guard let data = data, isJSONResponse else { return nil }
+		return try? JSONSerialization.jsonObject(
+			with: data,
+			options: .allowFragments
+		)
 	}
 }
