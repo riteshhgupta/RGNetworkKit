@@ -14,13 +14,14 @@ import Alamofire
 
 public protocol APIParameterProvider {
 
-	var parameter: [String: Any] { get }
+	var parameter: Any { get }
 	var multipartFormParameters: [String: MultipartFormDataProvider] { get }
 }
 
 public extension APIParameterProvider {
 
 	var multipartFormParameters: [String: MultipartFormDataProvider] {
+		guard let parameter = parameter as? [String: Any] else { return [:] }
 		return parameter.compactMap { $0 as? MultipartFormDataProvider }
 	}
 }

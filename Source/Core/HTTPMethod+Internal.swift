@@ -35,7 +35,7 @@ extension HTTPMethod {
 		case .post, .patch, .put:
 			return nil
 		default:
-			return model?.parameter
+			return model?.parameter as? [String: Any]
 		}
 	}
 }
