@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum RGNetworkKitError: Error {
+public enum RGNetworkKitError: Error {
 
 	case noData
 	case badResponse
