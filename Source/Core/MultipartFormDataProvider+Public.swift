@@ -20,7 +20,7 @@ extension String: MultipartFormDataProvider {
 extension UIImage: MultipartFormDataProvider {
 
 	public var data: Data? {
-		return UIImageJPEGRepresentation(self, 1.0)
+		return self.jpegData(compressionQuality: 1.0)
 	}
 
 	public func appendTo(_ formData: MultipartFormData, for key: String) {

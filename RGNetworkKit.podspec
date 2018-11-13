@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   }
   
   spec.subspec 'Core' do |core|
-    core.dependency 'Alamofire', '~> 4.5'
+    core.dependency 'Alamofire', '~> 4.7'
     core.dependency 'RGMapper', '~> 2.1'
     core.source_files =  'Source/**/*.swift', 'Source/**/*.xib'
     core.exclude_files = 'Source/Reactive/*.swift'
@@ -22,8 +22,8 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'ReactiveSwift' do |reactiveswift|    
     reactiveswift.dependency 'RGNetworkKit/Core'
-    reactiveswift.dependency 'ReactiveSwift', '~> 3.0'
-    reactiveswift.dependency 'ReactiveCocoa', '~> 7.0'
+    reactiveswift.dependency 'ReactiveSwift', '~> 4.0'
+    reactiveswift.dependency 'ReactiveCocoa', '~> 8.0'
     reactiveswift.source_files =  'Source/**/*.swift'
   end
 
