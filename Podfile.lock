@@ -11,6 +11,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.7)
   - ReactiveCocoa (~> 8.0)
   - ReactiveSwift (~> 4.0)
+  - Result (~> 4.0.0)
   - RGMapper (~> 2.1)
 
 SPEC REPOS:
@@ -28,6 +29,6 @@ SPEC CHECKSUMS:
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RGMapper: 5f4550f8fceb91e700203bb3ae71cf78a1bd215f
 
-PODFILE CHECKSUM: 4cd52709758bca9311c5facf2c4669a21a3428a6
+PODFILE CHECKSUM: 300d220b6fc96e5f17e36aeaaa9e572fa178fb50
 
 COCOAPODS: 1.5.3

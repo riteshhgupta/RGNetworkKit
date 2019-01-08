@@ -8,8 +8,6 @@
 
 import Foundation
 import Alamofire
-import Result
-import enum Alamofire.Result
 
 // default implementations of `APIClientProvider`
 

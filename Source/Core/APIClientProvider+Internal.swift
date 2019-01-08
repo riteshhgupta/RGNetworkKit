@@ -8,8 +8,6 @@
 
 import Foundation
 import Alamofire
-import Result
-import enum Result.Result
 
 extension APIClientProvider {
 

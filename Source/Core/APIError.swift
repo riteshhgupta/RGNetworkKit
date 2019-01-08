@@ -8,7 +8,6 @@
 
 import Foundation
 import RGMapper
-import Result
 
 // RGNetwork returns APIError which has two cases ––
 // 1. `mappedError` which returns a custom error from server (conforming to `Mappable`)

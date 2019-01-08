@@ -8,4 +8,5 @@ target 'RGNetworkKit' do
   pod 'RGMapper', '~> 2.1'
   pod 'ReactiveSwift', '~> 4.0'
   pod 'ReactiveCocoa', '~> 8.0'
+  pod 'Result', '~> 4.0.0'
 end

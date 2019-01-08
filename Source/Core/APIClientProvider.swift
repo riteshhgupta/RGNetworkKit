@@ -8,8 +8,6 @@
 
 import Foundation
 import Alamofire
-import Result
-import enum Result.Result
 
 /// `APIClientProvider` wraps the structure of an api client
 /// use `responseHandler(request: handler:)` to execute an api call

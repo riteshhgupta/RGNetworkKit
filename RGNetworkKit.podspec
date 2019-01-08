@@ -16,6 +16,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'Core' do |core|
     core.dependency 'Alamofire', '~> 4.7'
     core.dependency 'RGMapper', '~> 2.1'
+    core.dependency 'Result', '~> 4.0.0'
     core.source_files =  'Source/**/*.swift', 'Source/**/*.xib'
     core.exclude_files = 'Source/Reactive/*.swift'
   end
